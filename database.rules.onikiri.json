@@ -1,0 +1,36 @@
+{
+  "r": {
+    ".read": true,
+    ".indexOn": [
+      "d"
+    ],
+    "$u": {
+      ".write": "auth != null && auth.uid === $u && newData.exists()",
+      ".validate": "newData.hasChildren(['n','d','k','t']) && newData.child('n').isString() && newData.child('n').val().length >= 1 && newData.child('n').val().length <= 16 && newData.child('d').isNumber() && newData.child('d').val() >= 0 && newData.child('d').val() <= 999999 && newData.child('k').isString() && newData.child('k').val().matches(/^(red|blue|green|yellow|gray|black|purple|white|pink|sakura|bluepurple|fuji|orange|ainezu|none)$/) && newData.child('t').isNumber() && newData.child('t').val() >= 0 && newData.child('t').val() <= 100 && (!newData.child('w').exists() || (newData.child('w').isString() && newData.child('w').val().length <= 60)) && (!data.exists() || newData.child('d').val() >= data.child('d').val())"
+    }
+  },
+  "d": {
+    "$day": {
+      ".read": true,
+      ".indexOn": [
+        "d"
+      ],
+      "$u": {
+        ".write": "auth != null && auth.uid === $u && newData.exists()",
+        ".validate": "$day.matches(/^20[0-9][0-9][01][0-9][0-3][0-9]$/) && newData.hasChildren(['n','d','k','t']) && newData.child('n').isString() && newData.child('n').val().length >= 1 && newData.child('n').val().length <= 16 && newData.child('d').isNumber() && newData.child('d').val() >= 0 && newData.child('d').val() <= 999999 && newData.child('k').isString() && newData.child('k').val().matches(/^(red|blue|green|yellow|gray|black|purple|white|pink|sakura|bluepurple|fuji|orange|ainezu|none)$/) && newData.child('t').isNumber() && newData.child('t').val() >= 0 && newData.child('t').val() <= 100 && (!newData.child('w').exists() || (newData.child('w').isString() && newData.child('w').val().length <= 60)) && (!data.exists() || newData.child('d').val() >= data.child('d').val())"
+      }
+    }
+  },
+  "b": {
+    "$k": {
+      ".read": true,
+      ".indexOn": [
+        "d"
+      ],
+      "$u": {
+        ".write": "auth != null && auth.uid === $u && newData.exists()",
+        ".validate": "$k.matches(/^(red|blue|green|yellow|gray|black|purple|white|pink|sakura|bluepurple|fuji|orange|ainezu)$/) && newData.child('k').val() === $k && newData.hasChildren(['n','d','k','t']) && newData.child('n').isString() && newData.child('n').val().length >= 1 && newData.child('n').val().length <= 16 && newData.child('d').isNumber() && newData.child('d').val() >= 0 && newData.child('d').val() <= 999999 && newData.child('k').isString() && newData.child('k').val().matches(/^(red|blue|green|yellow|gray|black|purple|white|pink|sakura|bluepurple|fuji|orange|ainezu|none)$/) && newData.child('t').isNumber() && newData.child('t').val() >= 0 && newData.child('t').val() <= 100 && (!newData.child('w').exists() || (newData.child('w').isString() && newData.child('w').val().length <= 60)) && (!data.exists() || newData.child('d').val() >= data.child('d').val())"
+      }
+    }
+  }
+}
