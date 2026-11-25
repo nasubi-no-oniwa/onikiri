@@ -1,0 +1,35 @@
+# 才能なしのランキング（k/none）に、これまでの記録を写す。tools/backfill-none.mjs を上げたときに1回動く
+name: 才能なしのランキングに過去の記録を写す
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/backfill-none.mjs'
+      - '.github/workflows/backfill-none.yml'
+  workflow_dispatch:
+concurrency:
+  group: onikiri-backfill
+  cancel-in-progress: false
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: 道具を入れる
+        run: mkdir -p "$RUNNER_TEMP/x" && cd "$RUNNER_TEMP/x" && npm init -y >/dev/null && npm i google-auth-library@9 --silent
+      - name: 鍵を一時ファイルに書く
+        env:
+          SA: ${{ secrets.OTOKONOJI_SERVICE_ACCOUNT }}
+        run: |
+          if [ -z "$SA" ]; then echo "OTOKONOJI_SERVICE_ACCOUNT が登録されていません"; exit 1; fi
+          printf '%s' "$SA" > "$RUNNER_TEMP/sa.json"
+      - name: 記録を写す
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/sa.json
+        run: node tools/backfill-none.mjs
+      - name: 鍵を消す
+        if: always()
+        run: rm -f "$RUNNER_TEMP/sa.json"
