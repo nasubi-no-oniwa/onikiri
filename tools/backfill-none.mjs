@@ -1,5 +1,5 @@
 // 才能なし（刀の色が変わらない人）のランキング k/none に、これまでの全体ランキング n の記録を写す。
-// 何回動かしてもよい：k/none にまだ無い人と、n のほうが遠くまで走っている人だけ書く。
+// 何回動かしてもよい：k/none にまだ無い人と、n のほうが遠くまで走っている人だけ書く。 （2026-11-26 昼に2回目）
 import { token, api } from './fb.mjs';
 const tk = await token();
 const n = JSON.parse(await api('GET', '/onikiri/n.json', undefined, tk)) || {};
